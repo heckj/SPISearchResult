@@ -1,5 +1,5 @@
-import XCTest
 @testable import SPISearchResult
+import XCTest
 
 final class SPISearchResultTests: XCTestCase {
     func testExample() throws {
