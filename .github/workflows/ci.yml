@@ -8,6 +8,23 @@ on:
     branches: [ main ]
 
 jobs:
+  iOS:
+    runs-on: macos-13
+    strategy:
+      matrix:
+        xcode:
+          - { version: '15.0', sim: '', sdk: '' }
+    steps:
+      - uses: actions/checkout@v3
+      - name: list the available versions of Xcode
+        run: ls -al /Applications/Xcode*
+      - name: show sdks for this Xcode version
+        run: env DEVELOPER_DIR="/Applications/Xcode_${{ matrix.xcode.version }}.app" xcodebuild -showsdks
+      - name: show destinations for this Xcode version
+        run: env DEVELOPER_DIR="/Applications/Xcode_${{ matrix.xcode.version }}.app" xcodebuild -scheme 'SPISearchResult' -showdestinations
+      - name: Test
+        run: env DEVELOPER_DIR="/Applications/Xcode_${{ matrix.xcode.version }}.app" xcodebuild clean test -scheme 'SPISearchResult' -destination 'platform=iOS Simulator,OS=16.4,name=iPhone 8' -sdk iphonesimulator16.4 -showBuildTimingSummary
+
   macOS:
     # https://github.com/actions/runner-images
     runs-on: macos-13
