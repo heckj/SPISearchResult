@@ -25,20 +25,23 @@ public struct PackageId: Codable {
 
 public struct SearchResultPackage: Codable {
     public let id: PackageId
-    public let keywords_matched: [String]
+    public let matching_keywords: [String]
+    public let matching_authors: [String]
     public let summary: String?
     public let stars: Int
 
-    public init(id: PackageId, keywords_matched: [String], summary: String?, stars: Int) {
+    public init(id: PackageId, matching_keywords: [String], matching_authors: [String], summary: String?, stars: Int) {
         self.id = id
-        self.keywords_matched = keywords_matched
+        self.matching_keywords = matching_keywords
+        self.matching_authors = matching_authors
         self.summary = summary
         self.stars = stars
     }
 
     enum CodingKeys: String, CodingKey {
         case id
-        case keywords_matched = "k"
+        case matching_keywords = "k"
+        case matching_authors = "a"
         case summary = "s"
         case stars = "x"
     }
