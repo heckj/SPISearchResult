@@ -12,8 +12,8 @@ jobs:
     runs-on: macos-13
     strategy:
       matrix:
-        xcode:
-          - { version: '15.0', sim: '', sdk: '' }
+        xcode: # 15.0.1, 14.3.1, 14.2, 14.1 - default of 14.3.1
+          - { version: '15.0', simulator: 'platform=iOS Simulator,OS=17.0.1,name=iPhone 14', sdk: 'iphonesimulator17.0' }
     steps:
       - uses: actions/checkout@v3
       - name: list the available versions of Xcode
@@ -23,7 +23,7 @@ jobs:
       - name: show destinations for this Xcode version
         run: env DEVELOPER_DIR="/Applications/Xcode_${{ matrix.xcode.version }}.app" xcodebuild -scheme 'SPISearchResult' -showdestinations
       - name: Test
-        run: env DEVELOPER_DIR="/Applications/Xcode_${{ matrix.xcode.version }}.app" xcodebuild clean test -scheme 'SPISearchResult' -destination 'platform=iOS Simulator,OS=16.4,name=iPhone 8' -sdk iphonesimulator16.4 -showBuildTimingSummary
+        run: "env DEVELOPER_DIR=/Applications/Xcode_${{ matrix.xcode.version }}.app xcodebuild clean test -scheme 'SPISearchResult' -destination '${{ matrix.xcode.simulator }}' -sdk ${{ matrix.xcode.sdk }} -showBuildTimingSummary"
 
   macOS:
     # https://github.com/actions/runner-images
