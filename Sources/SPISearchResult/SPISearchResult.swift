@@ -12,9 +12,9 @@
 public struct SearchResult: Hashable, Identifiable, Codable {
     /// An opqaue idenfifier of the package.
     public var id: Int {
-        return self.hashValue
+        hashValue
     }
-    
+
     /// The time at which the search was invoked.
     public let timestamp: Date
     /// The combined query terms for the search.
@@ -25,7 +25,7 @@ public struct SearchResult: Hashable, Identifiable, Codable {
     public let authors: [String]
     /// The packages returned for the query terms.
     public let packages: [Package]
-    
+
     /// Creates a new search result.
     /// - Parameters:
     ///   - timestamp: The time at which the search was invoked.
@@ -33,7 +33,7 @@ public struct SearchResult: Hashable, Identifiable, Codable {
     ///   - keywords: The keywords matched by the query terms.
     ///   - authors: The authors matched by the query terms.
     ///   - packages: The packages returned for the query terms.
-    public init(timestamp: Date, query: String, keywords: [String] = [],authors: [String] = [], packages: [Package]) {
+    public init(timestamp: Date, query: String, keywords: [String] = [], authors: [String] = [], packages: [Package]) {
         self.timestamp = timestamp
         self.query = query
         self.keywords = keywords
@@ -48,7 +48,7 @@ public struct SearchResult: Hashable, Identifiable, Codable {
         case authors = "a"
         case packages = "p"
     }
-    
+
     /// A package as returned by a Swift Package Index search result.
     public struct Package: Hashable, Identifiable, Codable {
         /// The swift package index identifier for the package.
@@ -59,7 +59,7 @@ public struct SearchResult: Hashable, Identifiable, Codable {
         public let summary: String?
         /// The number of github stars reported for the package.
         public let stars: Int
-        
+
         /// Creates a new package entry for a search result.
         /// - Parameters:
         ///   - id: The package identifier.
@@ -79,7 +79,7 @@ public struct SearchResult: Hashable, Identifiable, Codable {
             case summary = "s"
             case stars = "x"
         }
-        
+
         /// A Swift Package Index package identifier
         public struct PackageId: Hashable, Comparable, Identifiable, Codable, CustomStringConvertible {
             /// A string that represents the owner of the package.
@@ -96,19 +96,19 @@ public struct SearchResult: Hashable, Identifiable, Codable {
                 case owner = "o"
                 case repository = "r"
             }
-            
+
             // MARK: PackageId Conformances
 
             /// A string description of the package identifier.
             public var description: String {
-                return "\(owner)/\(repository)"
+                "\(owner)/\(repository)"
             }
 
             /// The identifier of a swift package as a single string.
             public var id: String {
-                return self.description
+                description
             }
-            
+
             /// Compares two package identifiers to provide a stable sorting order by owner first, then repository.
             /// - Parameters:
             ///   - lhs: The first package id to be compared.
