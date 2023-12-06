@@ -10,9 +10,12 @@
 
 /// A search result from Swift Package Index
 public struct SearchResult: Hashable, Identifiable, Codable {
-    /// An opqaue idenfifier of the package.
+    /// An opaque identifier of the package.
     public var id: Int {
         hashValue
+        // NOTE: This is only a reasonably stable value because a search-result
+        // is a non-mutable item, so rather than using an additional UUID or
+        // such, we can take advantage of the hash value as a stable identifier.
     }
 
     /// The time at which the search was invoked.
@@ -57,7 +60,7 @@ public struct SearchResult: Hashable, Identifiable, Codable {
         public let package_keywords: [String]
         /// The summary description provided about the package.
         public let summary: String?
-        /// The number of github stars reported for the package.
+        /// The number of GitHub stars reported for the package.
         public let stars: Int
 
         /// Creates a new package entry for a search result.
@@ -65,7 +68,7 @@ public struct SearchResult: Hashable, Identifiable, Codable {
         ///   - id: The package identifier.
         ///   - matching_keywords: The keywords that matched from the search
         ///   - summary: The summary about the package.
-        ///   - stars: The number of github stars for the package.
+        ///   - stars: The number of GitHub stars for the package.
         public init(id: PackageId, package_keywords: [String], summary: String?, stars: Int) {
             self.id = id
             self.package_keywords = package_keywords
