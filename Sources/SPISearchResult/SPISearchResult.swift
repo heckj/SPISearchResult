@@ -33,7 +33,7 @@ public struct SearchResult: Hashable, Identifiable, Codable {
     ///   - keywords: The keywords matched by the query terms.
     ///   - authors: The authors matched by the query terms.
     ///   - packages: The packages returned for the query terms.
-    public init(timestamp: Date, query: String, keywords: [String] = [], authors: [String] = [], packages: [Package]) {
+    public init(timestamp: Date, query: String, keywords: [String], authors: [String], packages: [Package]) {
         self.timestamp = timestamp
         self.query = query
         self.keywords = keywords
@@ -66,7 +66,7 @@ public struct SearchResult: Hashable, Identifiable, Codable {
         ///   - matching_keywords: The keywords that matched from the search
         ///   - summary: The summary about the package.
         ///   - stars: The number of github stars for the package.
-        public init(id: PackageId, package_keywords: [String] = [], summary: String?, stars: Int) {
+        public init(id: PackageId, package_keywords: [String], summary: String?, stars: Int) {
             self.id = id
             self.package_keywords = package_keywords
             self.summary = summary
