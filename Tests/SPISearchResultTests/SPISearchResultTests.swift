@@ -4,10 +4,10 @@ import SPISearchResult
 import XCTest
 
 final class SPISearchResultTests: XCTestCase {
-    let samplePackageResult = SearchResult.Package(id: .init(owner: "heckj", repository: "SPISearchResult"), package_keywords: [], summary: "A package that defines the transfer objects to capture a collection of Search Results from Swift Package Index", stars: 1)
+    let samplePackageResult = SearchResult.Package(id: .init(owner: "heckj", repository: "SPISearchResult"), name: "SPISearchResult", package_keywords: [], summary: "A package that defines the transfer objects to capture a collection of Search Results from Swift Package Index", stars: 1)
 
     let expectedJSONString = """
-    {"id":{"o":"heckj","r":"SPISearchResult"},"k":[],"s":"A package that defines the transfer objects to capture a collection of Search Results from Swift Package Index","x":1}
+    {"id":{"o":"heckj","r":"SPISearchResult"},"k":[],"n":"SPISearchResult","s":"A package that defines the transfer objects to capture a collection of Search Results from Swift Package Index","x":1}
     """
 
     func testJSONEncode() throws {

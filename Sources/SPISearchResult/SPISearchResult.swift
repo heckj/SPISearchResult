@@ -56,6 +56,8 @@ public struct SearchResult: Hashable, Identifiable, Codable {
     public struct Package: Hashable, Identifiable, Codable {
         /// The swift package index identifier for the package.
         public let id: PackageId
+        /// The name of the package
+        public let name: String
         /// The keywords reported as matched for this package.
         public let package_keywords: [String]
         /// The summary description provided about the package.
@@ -69,8 +71,9 @@ public struct SearchResult: Hashable, Identifiable, Codable {
         ///   - matching_keywords: The keywords that matched from the search
         ///   - summary: The summary about the package.
         ///   - stars: The number of GitHub stars for the package.
-        public init(id: PackageId, package_keywords: [String], summary: String?, stars: Int) {
+        public init(id: PackageId, name: String, package_keywords: [String], summary: String?, stars: Int) {
             self.id = id
+            self.name = name
             self.package_keywords = package_keywords
             self.summary = summary
             self.stars = stars
@@ -78,6 +81,7 @@ public struct SearchResult: Hashable, Identifiable, Codable {
 
         enum CodingKeys: String, CodingKey {
             case id
+            case name = "n"
             case package_keywords = "k"
             case summary = "s"
             case stars = "x"
