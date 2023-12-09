@@ -64,6 +64,10 @@ public struct SearchResult: Hashable, Identifiable, Codable {
         public let summary: String?
         /// The number of GitHub stars reported for the package.
         public let stars: Int
+        /// A Boolean value that indicates whether the package includes documentation.
+        public let has_docs: Bool
+        /// The date of the most recent activity on the package from its repository.
+        public let last_activity: Date
 
         /// Creates a new package entry for a search result.
         /// - Parameters:
@@ -71,12 +75,14 @@ public struct SearchResult: Hashable, Identifiable, Codable {
         ///   - matching_keywords: The keywords that matched from the search
         ///   - summary: The summary about the package.
         ///   - stars: The number of GitHub stars for the package.
-        public init(id: PackageId, name: String, package_keywords: [String], summary: String?, stars: Int) {
+        public init(id: PackageId, name: String, package_keywords: [String], summary: String?, stars: Int, has_docs: Bool, last_activity: Date) {
             self.id = id
             self.name = name
             self.package_keywords = package_keywords
             self.summary = summary
             self.stars = stars
+            self.has_docs = has_docs
+            self.last_activity = last_activity
         }
 
         enum CodingKeys: String, CodingKey {
@@ -85,6 +91,8 @@ public struct SearchResult: Hashable, Identifiable, Codable {
             case package_keywords = "k"
             case summary = "s"
             case stars = "x"
+            case has_docs = "d"
+            case last_activity = "a"
         }
 
         /// A Swift Package Index package identifier
