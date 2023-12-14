@@ -57,7 +57,7 @@ public struct SearchResult: Hashable, Identifiable, Codable {
         /// The swift package index identifier for the package.
         public let id: PackageId
         /// The name of the package
-        public let name: String
+        public let name: String?
         /// The keywords reported as matched for this package.
         public let package_keywords: [String]
         /// The summary description provided about the package.
@@ -67,7 +67,7 @@ public struct SearchResult: Hashable, Identifiable, Codable {
         /// A Boolean value that indicates whether the package includes documentation.
         public let has_docs: Bool
         /// The date of the most recent activity on the package from its repository.
-        public let last_activity: Date
+        public let last_activity: Date?
 
         /// Creates a new package entry for a search result.
         /// - Parameters:
@@ -75,7 +75,7 @@ public struct SearchResult: Hashable, Identifiable, Codable {
         ///   - matching_keywords: The keywords that matched from the search
         ///   - summary: The summary about the package.
         ///   - stars: The number of GitHub stars for the package.
-        public init(id: PackageId, name: String, package_keywords: [String], summary: String?, stars: Int, has_docs: Bool, last_activity: Date) {
+        public init(id: PackageId, name: String?, package_keywords: [String], summary: String?, stars: Int, has_docs: Bool, last_activity: Date?) {
             self.id = id
             self.name = name
             self.package_keywords = package_keywords
