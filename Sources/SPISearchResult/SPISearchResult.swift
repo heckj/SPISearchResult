@@ -9,7 +9,7 @@
 #endif
 
 /// A search result from Swift Package Index
-public struct SearchResult: Hashable, Identifiable, Codable {
+public struct SearchResult: Hashable, Identifiable, Codable, Sendable {
     /// An opaque identifier of the package.
     public var id: Int {
         hashValue
@@ -44,7 +44,7 @@ public struct SearchResult: Hashable, Identifiable, Codable {
         self.packages = packages
     }
 
-    enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey, Sendable {
         case timestamp = "t"
         case query = "q"
         case keywords = "k"
@@ -53,7 +53,7 @@ public struct SearchResult: Hashable, Identifiable, Codable {
     }
 
     /// A package as returned by a Swift Package Index search result.
-    public struct Package: Hashable, Identifiable, Codable {
+    public struct Package: Hashable, Identifiable, Codable, Sendable {
         /// The swift package index identifier for the package.
         public let id: PackageId
         /// The name of the package
@@ -96,7 +96,7 @@ public struct SearchResult: Hashable, Identifiable, Codable {
         }
 
         /// A Swift Package Index package identifier
-        public struct PackageId: Hashable, Comparable, Identifiable, Codable, CustomStringConvertible {
+        public struct PackageId: Hashable, Comparable, Identifiable, Codable, CustomStringConvertible, Sendable {
             /// A string that represents the owner of the package.
             public let owner: String
             /// A string that represents the repository the holds the package.
