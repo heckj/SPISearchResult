@@ -1,6 +1,8 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.8
 
 import PackageDescription
+
+var globalSwiftSettings: [PackageDescription.SwiftSetting] = [.enableExperimentalFeature("StrictConcurrency")]
 
 let package = Package(
     name: "SPISearchResult",
@@ -21,7 +23,10 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "SPISearchResult"),
+            name: "SPISearchResult",
+            dependencies: [],
+            swiftSettings: globalSwiftSettings
+        ),
         .testTarget(
             name: "SPISearchResultTests",
             dependencies: [
